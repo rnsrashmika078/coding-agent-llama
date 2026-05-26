@@ -21,3 +21,6 @@ coding-agent/Scripts/
 # system
 .DS_Store
 Thumbs.db
+
+#memory
+.langgraph_api/

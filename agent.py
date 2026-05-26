@@ -1,10 +1,9 @@
-from deepagents import create_deep_agent
 from langchain.agents import AgentState, create_agent
 from langchain_core.messages import BaseMessage
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_ollama import ChatOllama
 from langgraph.graph import add_messages
-from deep_agent import call_deep_agent
+
 from langgraph_agent import run_langgraph
 from model_tools import (
     CustomState,
