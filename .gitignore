@@ -1,0 +1,23 @@
+# env files
+.env
+.env.*
+
+# python cache
+__pycache__/
+*.pyc
+
+# virtual env
+venv/
+coding-agent/Include/
+coding-agent/Lib/
+coding-agent/Scripts/
+
+# model files
+*.pt
+*.bin
+*.gguf
+*.safetensors
+
+# system
+.DS_Store
+Thumbs.db
