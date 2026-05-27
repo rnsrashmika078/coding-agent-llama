@@ -4,7 +4,7 @@ from langchain.agents import AgentState
 from langchain_core.tools import tool
 from pydantic import BaseModel
 from model import CustomState
-from utils import requestWeatherData
+from utils.utils import requestWeatherData
 from typing import List, Optional, Literal
 from langchain.tools import ToolRuntime
 import subprocess

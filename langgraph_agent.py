@@ -132,8 +132,6 @@ def run_langgraph(
 
     Args:
         task (str): Task user given to you
-
-
     """
 
     writer = get_stream_writer()
@@ -178,7 +176,8 @@ def run_langgraph(
             writer(f"{chunk['data']['status']}")
 
     state = full_state
-    return {
-        "absolute_path": state.get("absolute_path"),
-        "content": state.get("content"),
-    }
+    # return {
+    #     "absolute_path": state.get("absolute_path"),
+    #     "content": state.get("content"),
+    # }
+    return f"file create successfull at {state["absolute_path"]}"

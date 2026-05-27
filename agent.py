@@ -52,8 +52,7 @@ Rules:
 - Each user request is independent (stateless)
 
 Available tools:
-- run_terminal_command → execute terminal commands
-- call_traversal_agent → travese though the project file
+- run_langgraph → for file related operations: example : Create/generate files
 """,
     state_schema=CustomState,
     middleware=[
@@ -68,7 +67,7 @@ Available tools:
                 # "research": False,
                 # "deep_agent": False,
                 # "call_traversal_agent": True,
-                # "run_langgraph": False,
+                "run_langgraph": False,
                 # "create_files": True,
             }
         ),
