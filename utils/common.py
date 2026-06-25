@@ -5,7 +5,7 @@ import httpx
 load_dotenv()
 
 api_key = os.getenv("WEATHER_API_KEY")
-os.getenv("WEATHER_API_KEY")
+# os.getenv("WEATHER_API_KEY")
 
 
 async def requestWeatherData(city: str):

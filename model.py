@@ -6,5 +6,5 @@ from langgraph.graph import add_messages
 
 class CustomState(AgentState):
     messages: Annotated[list[BaseMessage], add_messages]
-    rootPath: str
-    fileTree: str
+    # rootPath: str
+    # fileTree: str

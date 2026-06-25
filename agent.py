@@ -22,7 +22,7 @@ llm = ChatOllama(model="gemma4:e2b", reasoning=True)
 agent = create_agent(
     llm,
     tools=[
-        # get_weather,
+        get_weather,
         # create_react_app,
         # run_react_app,
         # run_terminal_command,
@@ -42,7 +42,7 @@ You MUST follow this loop:
 2. TOOL: call a tool if needed
 3. OBSERVE: read the result
 4. REPEAT until task is complete
-5. FINAL: give final answer
+5. FINAL: give final answer. must be very very short. like few lines
 
 Rules:
 - You can call MULTIPLE tools step by step

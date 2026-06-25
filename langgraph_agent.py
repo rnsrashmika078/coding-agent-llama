@@ -33,18 +33,18 @@ class State(TypedDict):
 
 class FilePathStructuredOutput(BaseModel):
     absolute_path: str = Field(
-        ..., description="suitable Absolute directory path to the file"
+        ..., description="Suitable Absolute directory path to the file"
     )
 
 
 class FileContentStructuredOutput(BaseModel):
-    content: str = Field(..., description="suitable file content to the file")
+    content: str = Field(..., description="Suitable file content to the file")
 
 
 class StandardReactProjectStructure(BaseModel):
     knowledge_base: str = Field(
         ...,
-        description="the knowledge you gain from read md file about react project standard structure",
+        description="The knowledge you gain from read md file about react project standard structure",
     )
 
 
