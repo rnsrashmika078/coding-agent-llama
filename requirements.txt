@@ -16,3 +16,4 @@ httpx
 python-dotenv
 deepagents
 pypdf
+tavily 

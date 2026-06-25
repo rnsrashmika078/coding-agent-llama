@@ -1,3 +1,4 @@
+import json
 import os
 
 from langchain.agents import AgentState
@@ -30,7 +31,7 @@ async def get_weather(
     writer(f"Fetching Weather data...!")
     result = await requestWeatherData(city)
     writer(f"Successfully fetch the weather data!")
-    return f"weather data {result}"
+    return json.dumps({"weather Data": result})
 
 
 @tool("create_react_app")
