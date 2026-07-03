@@ -9,6 +9,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from langchain_ollama import ChatOllama
 from langgraph.graph import add_messages
 from langchain.agents.middleware import HumanInTheLoopMiddleware
+from memory.prosgres import get_postgress_checkpointer
 from secondary_tools import internet_search
 from sub_agents import call_research_agent, call_traversal_agent
 from model_tools import (
@@ -20,7 +21,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Your frontend URL
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -28,12 +29,19 @@ app.add_middleware(
 
 
 llm = ChatOllama(model="gemma4:e2b", reasoning=False)
+checkpointer = None
+
+
+# async def startup_event():
+#     global checkpointer
+#     checkpointer = await get_postgress_checkpointer()
 
 
 @app.post("/api/stream")
 async def stream_response(request: Request):
     try:
         body = await request.json()
+        # startup_event()
         print(f"BODY: {body}")
 
         payload = body.get("input", body)
@@ -61,13 +69,14 @@ async def stream_response(request: Request):
 
         agent = create_agent(
             llm,
+            # config,
             tools=[internet_search, get_weather],
             system_prompt="You are an expert React Vite developer. answer in very short. like 1 ",
             state_schema=CustomState,
             checkpointer=MemorySaver(),
+            # checkpointer=checkpointer,
         )
 
-        # Replicate the Next.js multi-stream mode generator
         async def generate():
             try:
                 async for stream_mode, data in agent.astream(
@@ -79,7 +88,6 @@ async def stream_response(request: Request):
                     print(data)
 
                     def clean_object(obj):
-                        # Handle BaseMessage subclasses explicitly
                         if isinstance(obj, BaseMessage):
                             data = {
                                 "type": obj.type,
@@ -92,11 +100,9 @@ async def stream_response(request: Request):
                                     obj, "response_metadata", {}
                                 ),
                             }
-                            # Add ToolMessage specific fields
                             if isinstance(obj, ToolMessage):
                                 data["tool_call_id"] = obj.tool_call_id
                                 data["artifact"] = obj.artifact
-                            # Add AIMessage specific fields
                             if isinstance(obj, AIMessage):
                                 data["tool_calls"] = obj.tool_calls
                             return data
